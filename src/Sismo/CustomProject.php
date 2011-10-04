@@ -116,8 +116,8 @@ class CustomProject extends Project {
 
     public function getCommand($which = null)
     {		
-		if(!is_null($which)) {
-			return $this->customCommands[$which];
+		if(!is_null($which)) {			
+			return isset($this->customCommands[$which]) ? $this->customCommands[$which] : null;
 		} else {
 			return $this->project->getCommand();
 		}

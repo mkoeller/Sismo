@@ -12,17 +12,25 @@ use Symfony\Component\Console\Output\ConsoleOutput;
  */
 abstract class CustomNotifier extends Notifier
 {
+	private $formatter;
+	
     public function notify(Commit $commit) {}
 	
-	public function displayToOutputInterface($output) {
-		$formatter = new OutputFormatter(true, array(
-			'title' => new OutputFormatterStyle('black', 'yellow')
-		));
+	public function getFormatter() {
+		if(is_null($this->formatter)) {
+			$this->formatter = new OutputFormatter(true, array(
+				'title' => new OutputFormatterStyle('black', 'yellow')
+			));
+		}
 		
+		return $this->formatter;
+	}
+	
+	public function displayToOutputInterface($output) {		
 		$console    = new ConsoleOutput(
 			\Symfony\Component\Console\Output\StreamOutput::VERBOSITY_NORMAL, 
 			true, 
-			$formatter
+			$this->getFormatter()
 		);
 		
 		$lines = explode(PHP_EOL, $output);
