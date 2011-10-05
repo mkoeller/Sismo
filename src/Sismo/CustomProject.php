@@ -6,7 +6,8 @@ class CustomProject extends Project {
 	private $customCommands;
 	
 	public function __construct(Project $project) {		
-		$this -> project = $project;
+		$this->project = $project;
+		$this->customCommands = array();
 	}
 	
 	public function __toString()
@@ -14,6 +15,11 @@ class CustomProject extends Project {
         return (string) $this->project;
     }
 
+	public function __call($name, $args)
+    {
+        return call_user_func_array(array($this->project, $name), $args);
+    }
+	
     public function setBuilding($bool)
     {
         return $this->project->setBuilding($bool);

@@ -6,9 +6,9 @@ use Symfony\Component\Process\Process;
 class CustomBuilder extends Builder {
 	public function build($command = null)
     {		
-		if(!is_null($command) && $this->project->getCommand($command) != '') {
-			file_put_contents($this->buildDir.'/sismo-build-custom-' . $command . '.sh', str_replace(array("\r\n", "\r"), "\n", $this->project->getCommand($command)));
-
+		if(!is_null($command) && $this->project->getCommand($command) != '' && $this->project->getCommand($command) != $this->project->getCommand()) {
+			file_put_contents($this->buildDir.'/sismo-build-custom-' . $command . '.sh', str_replace(array("\r\n", "\r"), "\n", $this->project->getCommand($command)));			
+			
 			$process = new Process('sh sismo-build-custom-' . $command . '.sh', $this->buildDir);
 			$process->setTimeout(3600);
 			$process->run();		

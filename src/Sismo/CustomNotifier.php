@@ -27,6 +27,8 @@ abstract class CustomNotifier extends Notifier
 	}
 	
 	public function displayToOutputInterface($output) {		
+		if(!in_array('--verbose', $_SERVER['argv']) && !in_array('-v', $_SERVER['argv'])) return;
+		
 		$console    = new ConsoleOutput(
 			\Symfony\Component\Console\Output\StreamOutput::VERBOSITY_NORMAL, 
 			true, 

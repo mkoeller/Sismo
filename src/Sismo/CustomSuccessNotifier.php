@@ -9,7 +9,7 @@ namespace Sismo;
 class CustomSuccessNotifier extends CustomNotifier
 {
     public function notify(Commit $commit)
-    {			
+    {				
         if($commit->isSuccessful()) {
 			$builder = new CustomBuilder($GLOBALS['app']['build.path'], $GLOBALS['app']['git.path'], $GLOBALS['app']['git.cmds']);
 			$builder->init($commit->getProject());

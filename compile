@@ -298,7 +298,7 @@ $cli = str_replace('return $console;', '', $cli);
 $controllers = 'namespace {'.str_replace('<?php', '', file_get_contents(__DIR__.'/src/controllers.php')).'}';
 $controllers = str_replace('return $app;', '', $controllers);
 
-$assets = sprintf('$app->get(\'/css/sismo.css\', function() { return new Response(\'%s\', 200, array(\'Content-Type\' => \'text/css\')); });', str_replace("'", "\\'", file_get_contents(__DIR__.'/web/css/sismo.css')));
+$assets  = sprintf('$app->get(\'/css/sismo.css\', function() { return new Response(\'%s\', 200, array(\'Content-Type\' => \'text/css\')); });', str_replace("'", "\\'", file_get_contents(__DIR__.'/web/css/sismo.css')));
 foreach (array('failed.png', 'header.png', 'hr.png', 'nobuild.png', 'success.png', 'sensio-labs-product.png') as $image) {
     $assets .= sprintf('$app->get(\'/images/%s\', function() { return new Response(base64_decode(\'%s\'), 200, array(\'Content-Type\' => \'image/png\')); });', $image, base64_encode(file_get_contents(__DIR__.'/web/images/'.$image)));
 }
